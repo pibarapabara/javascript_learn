@@ -1,0 +1,90 @@
+<html>
+<body>
+<canvas id="game" width="500" height="500" style="border: 1px solid black">
+</canvas>
+<script>
+    const canvas = document.getElementById('game');
+    const context = canvas.getContext('2d');
+
+    let x = 0;
+    let y = 0;
+    let isLeftPressed = false;
+    let isRightPressed = false;
+    let isUpPressed = false;
+    let isDownPressed = false;
+    let isShiftLeftPressed = false;
+
+
+    function draw() {
+        input();
+        context.clearRect(0, 0, 500, 500);
+        context.fillStyle = "#03dac6";
+        if (isLeftPressed || isRightPressed || isUpPressed || isDownPressed) {
+            context.fillStyle = "#a1ff00";
+        } else {
+            context.fillStyle = "#e200e8";
+        }
+
+        context.fillRect(x, y, 30, 30);
+        window.webkitRequestAnimationFrame(draw);
+    }
+
+    function input() {
+        if (isDownPressed && isShiftLeftPressed) {
+            y = y + 3;
+        } else if (isDownPressed) {
+            y++;
+        }
+        if (isUpPressed && isShiftLeftPressed) {
+            y = y - 3;
+        } else if (isUpPressed) {
+            y--;
+        }
+        if (isRightPressed && isShiftLeftPressed) {
+            x = x + 3;
+        } else if (isRightPressed) {
+            x++;
+        }
+        if (isLeftPressed && isShiftLeftPressed) {
+            x = x - 3;
+        } else if (isLeftPressed) {
+            x--;
+        }
+    }
+
+    draw();
+    window.addEventListener('keydown', event => {
+        if (event.code === 'ArrowLeft') {
+            isLeftPressed = true;
+        } else if (event.code === 'ArrowRight') {
+            isRightPressed = true;
+        } else if (event.code === 'ArrowUp') {
+            isUpPressed = true;
+        } else if (event.code === 'ArrowDown') {
+            isDownPressed = true;
+        } else if (event.code === 'ShiftLeft') {
+            isShiftLeftPressed = true;
+        }
+    });
+
+    window.addEventListener('keyup', event => {
+        if (event.code === 'ArrowLeft') {
+            isLeftPressed = false;
+        } else if (event.code === 'ArrowRight') {
+            isRightPressed = false;
+        } else if (event.code === 'ArrowUp') {
+            isUpPressed = false;
+        } else if (event.code === 'ArrowDown') {
+            isDownPressed = false;
+        } else if (event.code === 'ShiftLeft') {
+            isShiftLeftPressed = false;
+        }
+
+        if (event.code === 'Space') {
+            y = y - 10;
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "Coronavirus loudly",
+  "version": "1.0",
+  "description": "Yeap",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://www.worldometers.info/*"],
+      "js": ["corona.js"]
+    }
+  ]
+}
