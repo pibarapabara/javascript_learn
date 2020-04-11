@@ -12,6 +12,8 @@ const Kira ={
     }
 }
 
+
+
 const Kisj ={
     name: "Kisj",
     type: "cat",
