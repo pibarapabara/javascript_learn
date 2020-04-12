@@ -1,15 +1,15 @@
 const calculator = {
     add: function add(a, b) {
-        return (Number(a) + Number(b));
+        return (a + b);
     },
     subtract: function subtract(a, b) {
-        return (Number(a) - Number(b));
+        return (a - b);
     },
     multiply: function multuply(a, b) {
-        return (Number(a) * Number(b));
+        return (a * b);
     },
     divide: function divide(a, b) {
-        return (Number(a) / Number(b));
+        return (a / b);
     },
 }
 
@@ -21,7 +21,7 @@ const calculator = {
 const prompt = require('prompt-sync')();
 while (true) {
     console.log('\n\n*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.\n');
-    console.log('Please, use spacebar in your mathematical expression!');
+    console.log('Please, use space in your mathematical expression!');
     const expression = prompt('You can enter your mathematical expression here: ');
     if (expression == "exit") break;
     console.log("OK")
@@ -32,33 +32,31 @@ while (true) {
     let arraySize = array.length;
 
     if (arraySize != 3) {
-        console.log('Invalid Expression (Please, use spacebar!)');
+        console.log('Invalid Expression (Please, use space!)');
         continue;
     }
-    ;
 
-    let firstArgument = array[0];
+
+    let firstArgument = parseInt(array[0]);
     let operator = array[1];
-    let secondArgument = array[2];
+    let secondArgument = parseInt(array[2]);
 
-    function checkNumber(string) {
-        if (isNaN(string) == false) {
+    function isNotNumber(string) {
+        if (isNaN(string)) {
             return true;
         } else {
-            console.log('Only numbers are allowed in expression');
-            valid = false;
             return false;
         }
     }
 
-    if (!checkNumber(firstArgument)) {
+    if (isNotNumber(firstArgument)) {
+        console.log('Only numbers are allowed in expression');
         continue;
     }
-    ;
-    if (!checkNumber(secondArgument)) {
+    if (isNotNumber(secondArgument)) {
+        console.log('Only numbers are allowed in expression');
         continue;
     }
-    ;
 
 
     if (operator == "+") {
