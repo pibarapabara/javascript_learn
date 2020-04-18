@@ -1,4 +1,52 @@
+const prompt = require('prompt-sync')();
+
 const calculator = {
+    calculate: function calculate(expression) {
+        let array = expression.split(" ");
+
+        let arraySize = array.length;
+        if (arraySize > 3) {
+            return 'Invalid Expression (Please, use less spaces!)';
+        } else if (arraySize < 3) {
+            return 'Invalid Expression (Please, use additional spaces!)'
+        };
+
+
+        let firstArgument = parseInt(array[0]);
+        let operator = array[1];
+        let secondArgument = parseInt(array[2]);
+
+        function isNotNumber(string) {
+            if (isNaN(string)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (isNotNumber(firstArgument)) {
+            return 'Invalid first argument. Only numbers are allowed in expression';
+
+        }
+        if (isNotNumber(secondArgument)) {
+            return 'Invalid second argument. Only numbers are allowed in expression';
+        }
+
+        if (operator == "+") {
+            return calculator.add(firstArgument, secondArgument);
+        } else if (operator == "-") {
+            return calculator.subtract(firstArgument, secondArgument);
+        } else if (operator == "*") {
+            return calculator.multiply(firstArgument, secondArgument);
+        } else if (operator == "/") {
+            return calculator.divide(firstArgument, secondArgument);
+        } else if (operator == "%") {
+            return calculator.percent(firstArgument, secondArgument);
+        } else {
+            return 'Invalid operator! Please, use only "+", "-", "*", "/" or "%"';
+        }
+    },
+
     add: function add(a, b) {
         return (a + b);
     },
@@ -11,6 +59,9 @@ const calculator = {
     divide: function divide(a, b) {
         return (a / b);
     },
+    percent: function percent(a, b) {
+        return (a * b / 100);
+    },
 }
 
 //let result = calculator.subtract(30, 5);
@@ -18,56 +69,14 @@ const calculator = {
 
 //something new
 
-const prompt = require('prompt-sync')();
-while (true) {
+
+/*while (true) {
     console.log('\n\n*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.\n');
     console.log('Please, use space in your mathematical expression!');
     const expression = prompt('You can enter your mathematical expression here: ');
     if (expression == "exit") break;
-    console.log("OK")
 
+    console.log(calculator.calculate(expression));
+}*/
 
-    let array = expression.split(" ");
-
-    let arraySize = array.length;
-
-    if (arraySize != 3) {
-        console.log('Invalid Expression (Please, use space!)');
-        continue;
-    }
-
-
-    let firstArgument = parseInt(array[0]);
-    let operator = array[1];
-    let secondArgument = parseInt(array[2]);
-
-    function isNotNumber(string) {
-        if (isNaN(string)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    if (isNotNumber(firstArgument)) {
-        console.log('Only numbers are allowed in expression');
-        continue;
-    }
-    if (isNotNumber(secondArgument)) {
-        console.log('Only numbers are allowed in expression');
-        continue;
-    }
-
-
-    if (operator == "+") {
-        console.log(calculator.add(firstArgument, secondArgument));
-    } else if (operator == "-") {
-        console.log(calculator.subtract(firstArgument, secondArgument));
-    } else if (operator == "*") {
-        console.log(calculator.multiply(firstArgument, secondArgument));
-    } else if (operator == "/") {
-        console.log(calculator.divide(firstArgument, secondArgument));
-    } else {
-        console.log('Invalid argument!');
-    }
-}
+module.exports = calculator.calculate;
