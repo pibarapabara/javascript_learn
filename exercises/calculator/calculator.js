@@ -2,7 +2,7 @@ const prompt = require('prompt-sync')();
 
 const calculator = {
     calculate: function calculate(expression) {
-        let array = expression.split(" ");
+        let array = expression.split(/ +/);
 
         let arraySize = array.length;
         if (arraySize > 3) {

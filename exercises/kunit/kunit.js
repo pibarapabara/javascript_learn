@@ -8,8 +8,8 @@ function test(name, f) {
 }
 
 function assertEquals(a, b) {
-    if (a != b) {
-        throw a + " Is not equals. " + b
+    if (a !== b) {
+        throw JSON.stringify(a) + " Is not equals. " + JSON.stringify(b)
     }
 }
 
